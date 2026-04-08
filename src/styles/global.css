@@ -1,0 +1,16 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cisco-blue: #005073;
+  --color-terminal: #0d1117;
+}
+
+body {
+  @apply bg-[#050a14] text-slate-300 antialiased;
+  font-family: 'Inter', sans-serif;
+}
+
+/* Scrollbar estilizada */
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: #050a14; }
+::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 10px; }

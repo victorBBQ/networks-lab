@@ -1,0 +1,1214 @@
+---
+import "../styles/global.css";
+---
+
+<html lang="es" class="scroll-smooth">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <title>Guía de Redes | Cisco Lab</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;700;900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-[#020617] text-slate-300 font-sans selection:bg-blue-500/30">
+    <div class="flex">
+      <aside
+        class="fixed h-screen w-64 bg-black/40 border-r border-white/5 p-8 hidden lg:block overflow-y-auto"
+      >
+        <div
+          class="text-blue-500 font-black text-2xl tracking-tighter mb-10 italic uppercase"
+        >
+          CISCO<span class="text-white not-italic">_LAB</span>
+        </div>
+
+        <nav
+          class="space-y-4 text-xs font-bold uppercase tracking-widest text-white/90"
+        >
+          <a href="#diseno" class="block hover:text-blue-400 transition"
+            >01. Diseño e IPs</a
+          >
+          <a href="#seguridad" class="block hover:text-blue-400 transition"
+            >02. Seguridad</a
+          >
+          <a href="#acceso" class="block hover:text-blue-400 transition"
+            >03. Acceso L2</a
+          >
+          <a href="#nucleo" class="block hover:text-blue-400 transition"
+            >04. Núcleo L3</a
+          >
+          <a href="#dinamico" class="block hover:text-blue-400 transitio"
+            >05. Dinámico</a
+          >
+          <a href="#estatico" class="block hover:text-blue-400 transitio"
+            >06. Estático</a
+          >
+          <a href="#routers" class="block hover:text-blue-400 transitio"
+            >07. Routers/NAT</a
+          >
+          <a href="#wlan" class="block hover:text-blue-400 transitio"
+            >08. Wireless</a
+          >
+          <a href="#laptops" class="block hover:text-blue-400 transitio"
+            >09. Laptops</a
+          >
+
+          <div class="pt-4">
+            <a
+              href="#verificacion"
+              class="block text-blue-400 border border-blue-400/20 p-2 rounded text-center hover:bg-blue-400/10 transition uppercase tracking-tighter"
+            >
+              Verificación
+            </a>
+          </div>
+        </nav>
+      </aside>
+
+      <main class="lg:ml-72 p-8 md:p-16 max-w-6xl w-full">
+        <header class="mb-24">
+          <h1
+            class="text-6xl md:text-8xl font-black text-white mb-6 tracking-tighter leading-none"
+          >
+            Guía de <span class="text-blue-500">Redes</span>
+          </h1>
+          <p class="text-xl text-slate-400 italic max-w-2xl">
+            Configuración integral paso a paso para edificios West y Ost. Red
+            Global: <span class="text-blue-400 font-mono">10.0.V.X /16</span>
+          </p>
+        </header>
+
+        <section id="diseno" class="mb-32">
+          <h2
+            class="text-3xl font-bold text-white mb-8 border-l-4 border-blue-500 pl-4 uppercase"
+          >
+            01. Diseño Físico y Direccionamiento
+          </h2>
+
+          <div
+            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8"
+          >
+            <div class="p-5 bg-slate-900/50 rounded-xl border border-white/5">
+              <p class="text-[10px] text-blue-400 font-mono uppercase mb-2">
+                VLAN 08
+              </p>
+              <p class="font-bold text-white uppercase italic">Management</p>
+            </div>
+            <div class="p-5 bg-red-900/10 rounded-xl border border-red-500/20">
+              <p class="text-[10px] text-red-400 font-mono uppercase mb-2">
+                VLAN 12 / 13
+              </p>
+              <p class="font-bold text-red-100 uppercase italic">
+                Edificio West
+              </p>
+            </div>
+            <div
+              class="p-5 bg-pink-900/10 rounded-xl border border-pink-500/20"
+            >
+              <p class="text-[10px] text-pink-400 font-mono uppercase mb-2">
+                VLAN 22 / 23
+              </p>
+              <p class="font-bold text-pink-100 uppercase italic">
+                Edificio Ost
+              </p>
+            </div>
+            <div
+              class="p-5 bg-emerald-900/10 rounded-xl border border-emerald-500/20"
+            >
+              <p class="text-[10px] text-emerald-400 font-mono uppercase mb-2">
+                VLAN 99
+              </p>
+              <p class="font-bold text-emerald-100 uppercase italic">
+                Servidores
+              </p>
+            </div>
+          </div>
+
+          <div class="bg-blue-900/10 p-8 rounded-3xl border border-blue-500/20">
+            <h3 class="text-lg font-bold text-blue-400 mb-4 uppercase italic">
+              Especificaciones Core:
+            </h3>
+            <ul class="space-y-3 text-sm leading-relaxed italic text-slate-400">
+              <li class="flex items-center gap-3">
+                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                <strong>Puertos Core:</strong> Uso exclusivo de <span
+                  class="text-white font-mono">GigabitEthernet</span
+                > para interconexión entre Switches 3560 y Routers.
+              </li>
+              <li class="flex items-center gap-3">
+                <span class="w-2 h-2 bg-blue-500 rounded-full"></span>
+                <strong>Puertos Acceso:</strong> Uso de <span
+                  class="text-white font-mono">FastEthernet</span
+                > para Laptops y Switches 2960.
+              </li>
+            </ul>
+          </div>
+        </section>
+
+        <section id="seguridad" class="mb-32">
+          <h2
+            class="text-3xl font-bold text-white mb-8 border-l-4 border-blue-500 pl-4 uppercase"
+          >
+            02. Configuración Base y Seguridad (Todos)
+          </h2>
+          <div
+            class="bg-[#0a0f1e] rounded-2xl shadow-2xl border border-white/10 overflow-hidden font-mono text-sm"
+          >
+            <div
+              class="bg-white/5 px-4 py-2 border-b border-white/10 flex justify-between"
+            >
+              <span
+                class="text-xs text-slate-500 uppercase italic tracking-tighter"
+                >IOS CLI — Security & VTY Setup</span
+              >
+              <div class="flex gap-2">
+                <div class="w-2 h-2 rounded-full bg-red-500/50"></div>
+                <div class="w-2 h-2 rounded-full bg-green-500/50"></div>
+              </div>
+            </div>
+            <div class="p-8 text-blue-300 leading-relaxed overflow-x-auto">
+              <pre>enable
+configure terminal
+hostname [NOMBRE_DISPOSITIVO]
+ip domain-name lab.test
+no ip domain-lookup
+
+username cisco privilege 15 secret cisco
+enable secret cisco
+service password-encryption
+
+banner motd # ZUTRITT NUR FÜR BEFUGTE PERSONEN #
+
+access-list 10 permit 10.0.8.0 0.0.0.255
+
+line console 0
+ exec-timeout 0 0
+ logging synchronous
+ login
+exit
+
+line vty 0 15
+ exec-timeout 0 0
+ login local
+ transport input ssh
+ access-class 10 in
+exit
+
+logging buffered 8192
+crypto key generate rsa  (Elegir 1024)
+ip ssh version 2</pre>
+            </div>
+          </div>
+        </section>
+
+        <section id="acceso" class="mb-32">
+          <h2
+            class="text-3xl font-bold text-white mb-10 border-l-4 border-blue-500 pl-4 uppercase tracking-tighter"
+          >
+            03. Configuración de Switches de Acceso (2960 - L2)
+          </h2>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div
+              class="bg-slate-900/50 rounded-3xl border border-white/5 p-8 shadow-2xl"
+            >
+              <h3 class="text-xl font-bold text-blue-500 mb-6 uppercase">
+                SWITCH EV-L <span class="text-white font-medium">(WEST)</span>
+              </h3>
+
+              <div class="space-y-8 font-mono text-[12px] leading-relaxed">
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Creación VLANs
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 leading-relaxed overflow-x-auto"
+                  >
+                    <p>vlan 8 name Management</p>
+                    <p>vlan 13 name West_Azul</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Seguridad de Puertos
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>interface range fa0/1 - 24</p>
+                    <p class="pl-4">switchport mode access</p>
+                    <p class="pl-4">switchport access vlan 13</p>
+                    <p class="pl-4">spanning-tree portfast</p>
+                    <p class="pl-4">switchport port-security</p>
+                    <p class="pl-4">switchport port-security maximum 2</p>
+                    <p class="pl-4">
+                      switchport port-security mac-address sticky
+                    </p>
+                    <p class="pl-4">
+                      switchport port-security violation shutdown
+                    </p>
+                    <p class="pl-4">spanning-tree bpduguard enable</p>
+                    <p>exit</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Enlaces Troncales y Gestión
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>interface gig0/1</p>
+                    <p class="pl-4">description Hauptlink_zu_GV-L</p>
+                    <p class="pl-4">switchport mode trunk</p>
+                    <p>interface gig0/2</p>
+                    <p class="pl-4">description Hauptlink_zu_GV-R</p>
+                    <p class="pl-4">switchport mode trunk</p>
+                    <p>interface vlan 8</p>
+                    <p class="pl-4">ip address 10.0.8.11 255.255.255.0</p>
+                    <p class="pl-4">no shut</p>
+                    <p class="pl-4">exit</p>
+                    <p class="font-bold">ip default-gateway 10.0.8.1</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-slate-900/50 rounded-3xl border border-white/5 p-8 shadow-2xl"
+            >
+              <h3 class="text-xl font-bold text-blue-500 mb-6 uppercase">
+                SWITCH EV-R <span class="text-white font-normal not-italic"
+                  >(EAST)</span
+                >
+              </h3>
+
+              <div class="space-y-8 font-mono text-[12px] leading-relaxed">
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Creación VLANs
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>vlan 8 name Management</p>
+                    <p>vlan 23 name East_Lila</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Seguridad de Puertos
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>interface range fa0/1 - 24</p>
+                    <p class="pl-4">switchport mode access</p>
+                    <p class="pl-4">switchport access vlan 23</p>
+                    <p class="pl-4">spanning-tree portfast</p>
+                    <p class="pl-4">switchport port-security</p>
+                    <p class="pl-4">switchport port-security maximum 2</p>
+                    <p class="pl-4">
+                      switchport port-security mac-address sticky
+                    </p>
+                    <p class="pl-4">
+                      switchport port-security violation shutdown
+                    </p>
+                    <p class="pl-4">spanning-tree bpduguard enable</p>
+                    <p>exit</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Enlaces Troncales y Gestión
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>interface gig0/1</p>
+                    <p class="pl-4">description Hauptlink_zu_GV-R</p>
+                    <p class="pl-4">switchport mode trunk</p>
+                    <p>interface gig0/2</p>
+                    <p class="pl-4">description Hauptlink_zu_GV-L</p>
+                    <p class="pl-4">switchport mode trunk</p>
+                    <p>interface vlan 8</p>
+                    <p class="pl-4">ip address 10.0.8.22 255.255.255.0</p>
+                    <p class="pl-4">no shut</p>
+                    <p class="pl-4">exit</p>
+                    <p class="font-bold">ip default-gateway 10.0.8.2</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="nucleo" class="mb-32">
+          <h2
+            class="text-3xl font-bold text-white mb-10 border-l-4 border-blue-500 pl-4 uppercase tracking-tighter"
+          >
+            04. Configuración del Núcleo (3560 - Capa 3)
+          </h2>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div
+              class="bg-slate-900/50 rounded-3xl border border-white/5 p-8 shadow-2xl"
+            >
+              <h3 class="text-xl font-bold text-blue-500 mb-6 uppercase">
+                SWITCH GV-L <span class="text-white font-medium">(WEST)</span>
+              </h3>
+
+              <div class="space-y-8 font-mono text-[12px] leading-relaxed">
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Activación L3 y VLANs
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>ip routing</p>
+                    <p>vlan 8 name Management</p>
+                    <p class="text-slate-500 italic font-sans">
+                      // Crear también vlan 12, 13, 22, 23, 99
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Gateways (SVIs) y HSRP
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100 space-y-4"
+                  >
+                    <div>
+                      <p class="text-slate-500 italic">// VLAN 12 & 13</p>
+                      <p>interface vlan 12</p>
+                      <p class="pl-4 italic">
+                        ip address 10.0.12.2 255.255.255.0
+                      </p>
+                      <p
+                        class="pl-4 text-emerald-400 font-bold italic underline decoration-emerald-500/50"
+                      >
+                        standby 12 ip 10.0.12.1
+                      </p>
+                      <p class="pl-4 text-emerald-400">
+                        standby 12 priority 110
+                      </p>
+                      <p class="pl-4">standby 12 preempt</p>
+                      <p>interface vlan 13</p>
+                      <p class="pl-4 italic">
+                        ip address 10.0.13.2 255.255.255.0
+                      </p>
+                      <p
+                        class="pl-4 text-emerald-400 font-bold italic underline decoration-emerald-500/50"
+                      >
+                        standby 13 ip 10.0.13.1
+                      </p>
+                      <p class="pl-4 text-emerald-400">
+                        standby 13 priority 110
+                      </p>
+                    </div>
+                    <div>
+                      <p class="text-slate-500 italic">// VLAN 22 & 23</p>
+                      <p>interface vlan 22</p>
+                      <p class="pl-4 italic">
+                        ip address 10.0.22.2 255.255.255.0
+                      </p>
+                      <p
+                        class="pl-4 text-pink-400 italic underline decoration-pink-500/50 font-bold"
+                      >
+                        standby 22 ip 10.0.22.1
+                      </p>
+                      <p class="pl-4">standby 22 priority 100</p>
+                      <p>interface vlan 23</p>
+                      <p class="pl-4 italic">
+                        ip address 10.0.23.2 255.255.255.0
+                      </p>
+                      <p
+                        class="pl-4 text-pink-400 italic underline decoration-pink-500/50 font-bold"
+                      >
+                        standby 23 ip 10.0.23.1
+                      </p>
+                      <p>no shut</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // VLAN 99 y Seguridad Server
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>interface vlan 99</p>
+                    <p class="pl-4 italic">
+                      ip address 10.0.99.2 255.255.255.0
+                    </p>
+                    <p class="pl-4 text-emerald-400 font-bold italic underline">
+                      standby 99 ip 10.0.99.1
+                    </p>
+                    <p class="pl-4 text-emerald-400">standby 99 priority 110</p>
+                    <br />
+                    <p>ip access-list extended SERVER_SECURITY</p>
+                    <p class="pl-4">
+                      permit ip 10.0.8.0 0.0.0.255 10.0.99.0 0.0.0.255
+                    </p>
+                    <p class="pl-4 text-red-400 font-bold">
+                      deny ip 10.0.0.0 0.0.255.255 10.0.99.0 0.0.0.255
+                    </p>
+                    <p class="pl-4 italic">permit ip any any</p>
+                    <p>interface vlan 99</p>
+                    <p class="pl-4 italic font-bold">
+                      ip access-group SERVER_SECURITY out
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Etherchannel y Enlaces Core
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p class="text-slate-500 italic">
+                      // Enlace entre Edificios
+                    </p>
+                    <p>interface range gig0/1 - 2</p>
+                    <p class="pl-4 italic">no switchport</p>
+                    <p class="pl-4 italic font-bold">
+                      channel-group 1 mode active
+                    </p>
+                    <p>interface port-channel 1</p>
+                    <p class="pl-4 italic">
+                      ip address 10.0.99.1 255.255.255.252
+                    </p>
+                    <br />
+                    <p class="text-slate-500 italic">// Hacia Router 1</p>
+                    <p>interface gig0/3</p>
+                    <p class="pl-4 italic">no switchport</p>
+                    <p class="pl-4 italic font-bold text-emerald-400">
+                      ip address 10.0.1.2 255.255.255.252
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-slate-900/50 rounded-3xl border border-white/5 p-8 shadow-2xl"
+            >
+              <h3 class="text-xl font-bold text-blue-500 mb-6 uppercase">
+                SWITCH GV-R <span class="text-white font-medium">(OST)</span>
+              </h3>
+
+              <div
+                class="space-y-8 font-mono text-[12px] leading-relaxed italic"
+              >
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Activación L3 y VLANs
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>ip routing</p>
+                    <p>vlan 8 name Management</p>
+                    <p class="text-slate-500 italic font-sans">
+                      // Crear también vlan 12, 13, 22, 23, 99
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Gateways (SVIs) y HSRP
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100 space-y-4"
+                  >
+                    <div>
+                      <p class="text-slate-500 italic">// VLAN 12 & 13</p>
+                      <p>interface vlan 12</p>
+                      <p class="pl-4 italic">
+                        ip address 10.0.12.3 255.255.255.0
+                      </p>
+                      <p
+                        class="pl-4 text-emerald-400 font-bold italic underline decoration-emerald-500/50"
+                      >
+                        standby 12 ip 10.0.12.1
+                      </p>
+                      <p class="pl-4 text-emerald-400">
+                        standby 12 priority 100
+                      </p>
+                      <p>interface vlan 13</p>
+                      <p class="pl-4 italic">
+                        ip address 10.0.13.3 255.255.255.0
+                      </p>
+                      <p
+                        class="pl-4 text-emerald-400 font-bold italic underline decoration-emerald-500/50"
+                      >
+                        standby 13 ip 10.0.13.1
+                      </p>
+                      <p class="pl-4 text-emerald-400">
+                        standby 13 priority 100
+                      </p>
+                    </div>
+                    <div>
+                      <p class="text-slate-500 italic">// VLAN 22 & 23</p>
+                      <p>interface vlan 22</p>
+                      <p class="pl-4 italic">
+                        ip address 10.0.22.3 255.255.255.0
+                      </p>
+                      <p
+                        class="pl-4 text-pink-400 italic underline decoration-pink-500/50 font-bold"
+                      >
+                        standby 22 ip 10.0.22.1
+                      </p>
+                      <p class="pl-4">standby 22 priority 110</p>
+                      <p class="pl-4">standby 22 preempt</p>
+                      <p>interface vlan 23</p>
+                      <p class="pl-4 italic">
+                        ip address 10.0.23.3 255.255.255.0
+                      </p>
+                      <p
+                        class="pl-4 text-pink-400 italic underline decoration-pink-500/50 font-bold"
+                      >
+                        standby 23 ip 10.0.23.1
+                      </p>
+                      <p class="pl-4">standby 23 priority 110</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // VLAN 99 y Seguridad Server
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>interface vlan 99</p>
+                    <p class="pl-4 italic">
+                      ip address 10.0.99.3 255.255.255.0
+                    </p>
+                    <p class="pl-4 text-emerald-400 font-bold italic underline">
+                      standby 99 ip 10.0.99.1
+                    </p>
+                    <p class="pl-4 text-emerald-400">standby 99 priority 100</p>
+                    <br />
+                    <p>ip access-list extended SERVER_SECURITY</p>
+                    <p class="pl-4">
+                      permit ip 10.0.8.0 0.0.0.255 10.0.99.0 0.0.0.255
+                    </p>
+                    <p class="pl-4 text-red-400 font-bold">
+                      deny ip 10.0.0.0 0.0.255.255 10.0.99.0 0.0.0.255
+                    </p>
+                    <p class="pl-4 italic">permit ip any any</p>
+                    <p>interface vlan 99</p>
+                    <p class="pl-4 italic font-bold">
+                      ip access-group SERVER_SECURITY out
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Etherchannel y Enlaces Core
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p class="text-slate-500 italic">
+                      // Enlace entre Edificios
+                    </p>
+                    <p>interface range gig0/1 - 2</p>
+                    <p class="pl-4 italic font-bold">
+                      channel-group 1 mode active
+                    </p>
+                    <p>interface port-channel 1</p>
+                    <p class="pl-4 italic">
+                      ip address 10.0.99.2 255.255.255.252
+                    </p>
+                    <br />
+                    <p class="text-slate-500 italic">// Hacia Router 2</p>
+                    <p>interface gig0/3</p>
+                    <p class="pl-4 italic">no switchport</p>
+                    <p class="pl-4 italic font-bold text-emerald-400">
+                      ip address 10.0.2.2 255.255.255.252
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="dinamico" class="mb-32">
+          <h2
+            class="text-3xl font-bold text-white mb-8 border-l-4 border-blue-500 pl-4 uppercase tracking-tighter italic"
+          >
+            05. Enrutamiento Dinámico (RIP v2)
+          </h2>
+          <div
+            class="bg-slate-900 p-8 rounded-3xl border border-white/5 italic"
+          >
+            <p
+              class="text-sm text-slate-400 mb-6 italic border-l border-blue-500 pl-4 leading-relaxed uppercase tracking-widest uppercase italic tracking-tighter"
+            >
+              Configuración para GV-L, GV-R y Routers:
+            </p>
+            <pre
+              class="bg-black/30 p-6 rounded-xl font-mono text-sm text-blue-300">router rip
+ version 2
+ network 10.0.0.0
+ default-information originate (Solo Routers)
+ no auto-summary</pre>
+          </div>
+        </section>
+
+        <section id="estatico" class="mb-32">
+          <h2
+            class="text-3xl font-bold text-white mb-10 border-l-4 border-blue-500 pl-4 uppercase tracking-tighter"
+          >
+            06. Enrutamiento Estático (Mapa de Red)
+          </h2>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div
+              class="bg-slate-900/50 rounded-3xl border border-white/5 p-8 shadow-2xl"
+            >
+              <h3 class="text-xl font-bold text-blue-500 mb-6 uppercase">
+                SWITCH GV-L <span class="text-white font-medium">(WEST)</span>
+              </h3>
+
+              <div class="space-y-8 font-mono text-[12px] leading-relaxed">
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Rutas hacia el Edificio Ost
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>ip route 10.0.22.0 255.255.255.0 10.0.99.2</p>
+                    <p>ip route 10.0.23.0 255.255.255.0 10.0.99.2</p>
+                    <p class="text-orange-400 italic font-bold">
+                      ip route 10.0.13.0 255.255.255.0 10.0.99.2 20 (Falla)
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Rutas hacia Internet (Prioridad)
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>
+                      ip route 0.0.0.0 0.0.0.0 10.0.1.1 10 <span
+                        class="text-slate-500">// Vía Router 1 - Principal</span
+                      >
+                    </p>
+                    <p>
+                      ip route 0.0.0.0 0.0.0.0 10.0.99.2 50 <span
+                        class="text-slate-500">// Vía Router 2 - Respaldo</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-slate-900/50 rounded-3xl border border-white/5 p-8 shadow-2xl font-black"
+            >
+              <h3
+                class="text-xl font-bold text-blue-500 mb-6 uppercase italic tracking-widest"
+              >
+                SWITCH GV-R <span class="text-white font-medium not-italic"
+                  >(OST)</span
+                >
+              </h3>
+
+              <div class="space-y-8 font-mono text-[12px] leading-relaxed">
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Rutas hacia el Edificio West
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>ip route 10.0.12.0 255.255.255.0 10.0.99.1</p>
+                    <p>ip route 10.0.13.0 255.255.255.0 10.0.99.1</p>
+                    <p class="text-orange-400 italic font-bold">
+                      ip route 10.0.23.0 255.255.255.0 10.0.99.1 20 (Falla)
+                    </p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Rutas hacia Internet (Prioridad)
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>
+                      ip route 0.0.0.0 0.0.0.0 10.0.2.1 10 <span
+                        class="text-slate-500">// Vía Router 2 - Principal</span
+                      >
+                    </p>
+                    <p>
+                      ip route 0.0.0.0 0.0.0.0 10.0.99.1 50 <span
+                        class="text-slate-500">// Vía Router 1 - Respaldo</span
+                      >
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="routers" class="mb-32">
+          <h2
+            class="text-3xl font-bold text-white mb-10 border-l-4 border-blue-500 pl-4 uppercase tracking-tighter"
+          >
+            07. Configuración de los Routers (Internet y NAT)
+          </h2>
+
+          <div class="grid lg:grid-cols-2 gap-8">
+            <div
+              class="bg-slate-900/50 rounded-3xl border border-white/5 p-8 shadow-2xl"
+            >
+              <h3 class="text-xl font-bold text-blue-500 mb-6 uppercase">
+                ROUTER 1
+              </h3>
+
+              <div class="space-y-8 font-mono text-[12px] leading-relaxed">
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Configuración de Interfaces
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100 space-y-4"
+                  >
+                    <div>
+                      <p class="text-slate-500 italic">
+                        // Hacia el Switch (LAN)
+                      </p>
+                      <p>interface f0/1</p>
+                      <p class="pl-4">ip address 10.0.1.1 255.255.255.252</p>
+                      <p class="pl-4 font-bold text-emerald-400">
+                        ip nat inside
+                      </p>
+                      <p class="pl-4">no shutdown</p>
+                    </div>
+                    <div>
+                      <p class="text-slate-500 italic">
+                        // Hacia Internet (WAN)
+                      </p>
+                      <p>interface f0/2</p>
+                      <p class="pl-4 italic">
+                        ip address [IP_Pública] [Máscara]
+                      </p>
+                      <p class="pl-4 font-bold text-blue-400">ip nat outside</p>
+                      <p class="pl-4">no shutdown</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Rutas de Salida y Retorno
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p class="text-slate-500 italic">// Salida al mundo</p>
+                    <p>ip route 0.0.0.0 0.0.0.0 [IP_ISP]</p>
+                    <br />
+                    <p
+                      class="text-orange-400 font-bold italic underline decoration-orange-500/30"
+                    >
+                      // Ruta de Retorno (VITAL)
+                    </p>
+                    <p>ip route 10.0.0.0 255.255.0.0 10.0.1.2</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Configuración NAT (PAT)
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>access-list 1 permit 10.0.0.0 0.0.255.255</p>
+                    <p class="font-bold text-blue-400 italic">
+                      ip nat inside source list 1 interface f0/2 overload
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="bg-slate-900/50 rounded-3xl border border-white/5 p-8 shadow-2xl"
+            >
+              <h3 class="text-xl font-bold text-blue-500 mb-6 uppercase">
+                ROUTER 2
+              </h3>
+
+              <div class="space-y-8 font-mono text-[12px] leading-relaxed">
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Configuración de Interfaces
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100 space-y-4"
+                  >
+                    <div>
+                      <p class="text-slate-500 italic">
+                        // Hacia el Switch (LAN)
+                      </p>
+                      <p>interface f0/1</p>
+                      <p class="pl-4">ip address 10.0.2.1 255.255.255.252</p>
+                      <p class="pl-4 font-bold text-emerald-400">
+                        ip nat inside
+                      </p>
+                      <p class="pl-4">no shutdown</p>
+                    </div>
+                    <div>
+                      <p class="text-slate-500 italic">
+                        // Hacia Internet (WAN)
+                      </p>
+                      <p>interface f0/2</p>
+                      <p class="pl-4 italic">
+                        ip address [IP_Pública_R2] [Máscara]
+                      </p>
+                      <p class="pl-4 font-bold text-blue-400">ip nat outside</p>
+                      <p class="pl-4">no shutdown</p>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Rutas de Salida y Retorno
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p class="text-slate-500 italic">// Salida al mundo</p>
+                    <p>ip route 0.0.0.0 0.0.0.0 [IP_ISP_R2]</p>
+                    <br />
+                    <p
+                      class="text-orange-400 font-bold italic underline decoration-orange-500/30"
+                    >
+                      // Ruta de Retorno (VITAL)
+                    </p>
+                    <p>ip route 10.0.0.0 255.255.0.0 10.0.2.2</p>
+                  </div>
+                </div>
+
+                <div>
+                  <p
+                    class="text-emerald-400 font-bold mb-2 uppercase tracking-widest italic underline decoration-emerald-500/30"
+                  >
+                    // Configuración NAT (PAT)
+                  </p>
+                  <div
+                    class="bg-black/40 p-4 rounded-xl border border-white/5 text-blue-100"
+                  >
+                    <p>access-list 1 permit 10.0.0.0 0.0.255.255</p>
+                    <p class="font-bold text-blue-400 italic">
+                      ip nat inside source list 1 interface f0/2 overload
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="wlan" class="mb-32">
+          <h2
+            class="text-3xl font-bold text-white mb-8 border-l-4 border-blue-500 pl-4 uppercase tracking-tighter italic font-black italic underline decoration-blue-500/30 tracking-tight leading-none uppercase tracking-widest italic"
+          >
+            08. Wireless Routers (WLAN)
+          </h2>
+          <div class="grid md:grid-cols-2 gap-8">
+            <div
+              class="p-8 bg-slate-900 rounded-[2rem] border border-white/5 italic"
+            >
+              <h3
+                class="font-bold text-white mb-4 italic tracking-widest italic underline decoration-blue-500/30 tracking-tight leading-none uppercase tracking-widest italic"
+              >
+                Conexión WAN
+              </h3>
+              <p
+                class="text-xs text-slate-400 italic underline decoration-blue-500/30 tracking-tight leading-none uppercase tracking-widest italic leading-relaxed"
+              >
+                Conectar puerto Internet (WAN) del Wireless Router al puerto
+                disponible del Router 1 (y Router 2).
+              </p>
+            </div>
+            <div
+              class="p-8 bg-slate-900 rounded-[2rem] border border-white/5 italic"
+            >
+              <h3
+                class="font-bold text-blue-400 mb-4 italic tracking-widest italic underline decoration-blue-500/30 tracking-tight leading-none uppercase tracking-widest italic underline decoration-blue-500/30 tracking-tight leading-none uppercase tracking-widest italic underline decoration-blue-500/30 tracking-tight leading-none uppercase tracking-widest italic font-bold"
+              >
+                Configuración Interna
+              </h3>
+              <ul
+                class="text-[11px] font-mono text-slate-500 space-y-2 uppercase tracking-widest italic leading-relaxed italic underline decoration-blue-500/30 tracking-tight leading-none uppercase tracking-widest italic"
+              >
+                <li class="flex justify-between border-b border-white/5 pb-1">
+                  <span>SSID:</span>
+                  <span class="text-white">Red_Empresa</span>
+                </li>
+                <li class="flex justify-between border-b border-white/5 pb-1">
+                  <span>Seguridad:</span>
+                  <span class="text-white">WPA2-Personal</span>
+                </li>
+                <li class="flex justify-between">
+                  <span>LAN IP:</span>
+                  <span class="text-white">192.168.10.1</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="laptops" class="mb-32">
+    <h2 class="text-3xl font-bold text-white mb-10 border-l-4 border-blue-500 pl-4 uppercase tracking-tighter">
+        09. Configuración de Laptops
+    </h2>
+    
+    <div class="bg-slate-900/50 rounded-[2.5rem] p-12 border border-white/5 shadow-2xl shadow-black/50">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 items-center text-center">
+            
+            <div class="flex flex-col items-center">
+                <p class="text-[13px] mb-3 font-mono uppercase tracking-[0.2em] text-blue-500 font-bold italic underline decoration-blue-500/30">
+                    IP Address
+                </p>
+                <p class="text-xl font-bold text-white uppercase italic tracking-tight">
+                    DHCP Automático
+                </p>
+				<p class="text-[12px] font-medium text-slate-500 lowercase mt-1 italic font-sans invisible">
+                    (De su vlan correspondiente)
+                </p>
+            </div>
+
+            <div class="flex flex-col items-center border-y md:border-y-0 md:border-x border-white/10 py-8 md:py-0">
+                <p class="text-[13px] mb-3 font-mono uppercase tracking-[0.2em] text-blue-500 font-bold italic underline decoration-blue-500/30">
+                    Subnet Mask
+                </p>
+                <p class="text-xl font-bold text-white uppercase italic tracking-tight">
+                    255.255.255.0
+                </p>
+				<p class="text-[12px] font-medium text-slate-500 lowercase mt-1 italic font-sans invisible">
+                    (De su vlan correspondiente)
+                </p>
+            </div>
+
+            <div class="flex flex-col items-center font-black">
+                <p class="text-[13px] mb-3 font-mono uppercase tracking-[0.2em] text-emerald-400 font-bold italic underline decoration-emerald-500/30 tracking-widest uppercase italic tracking-tighter">
+                    Default Gateway
+                </p>
+                <p class="text-xl font-bold text-white uppercase italic tracking-tight leading-tight">
+                    IP Fantasma .1
+                </p>
+                <p class="text-[12px] font-medium text-slate-500 mt-1 italic font-sans">
+                    (De su VLAN correspondiente)
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+        <section id="verificacion" class="mb-32">
+          <div
+            class="border-2 border-dashed border-slate-700 p-12 rounded-[3.5rem] bg-slate-900/20 shadow-2xl"
+          >
+            <h2
+              class="text-4xl font-black text-white mb-10 text-center uppercase tracking-tighter italic"
+            >
+              Resumen para verificar <span
+                class="text-blue-500 underline decoration-blue-500 underline-offset-8"
+                >Éxito</span
+              >
+            </h2>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div
+                class="p-6 bg-white/5 rounded-2xl border-l-4 border-blue-500"
+              >
+                <p
+                  class="text-blue-500 font-bold text-xs mb-2 uppercase tracking-widest"
+                >
+                  01. Ping Interno
+                </p>
+                <p class="text-sm italic leading-relaxed text-slate-400">
+                  Laptop West (VLAN 12) -> Laptop West (VLAN 13).
+                  <span class="text-white font-bold"
+                    >Verifica Inter-VLAN Routing en GV-L.</span
+                  >
+                </p>
+              </div>
+
+              <div
+                class="p-6 bg-white/5 rounded-2xl border-l-4 border-emerald-500"
+              >
+                <p
+                  class="text-emerald-500 font-bold text-xs mb-2 uppercase tracking-widest"
+                >
+                  02. Entre Edificios
+                </p>
+                <p class="text-sm italic leading-relaxed text-slate-400">
+                  Laptop West -> Laptop Ost.
+                  <span class="text-white font-bold"
+                    >Verifica EtherChannel y Rutas Estáticas.</span
+                  >
+                </p>
+              </div>
+
+              <div
+                class="p-6 bg-white/5 rounded-2xl border-l-4 border-pink-500"
+              >
+                <p
+                  class="text-pink-500 font-bold text-xs mb-2 uppercase tracking-widest"
+                >
+                  03. Internet (WAN)
+                </p>
+                <p class="text-sm italic leading-relaxed text-slate-400">
+                  Laptop -> Servidor Externo (8.8.8.8).
+                  <span class="text-white font-bold"
+                    >Verifica NAT Overload en el Router.</span
+                  >
+                </p>
+              </div>
+
+              <div
+                class="p-6 bg-white/5 rounded-2xl border-l-4 border-orange-500"
+              >
+                <p
+                  class="text-orange-500 font-bold text-xs mb-2 uppercase tracking-widest"
+                >
+                  04. Prueba de Backup
+                </p>
+                <p class="text-sm italic leading-relaxed text-slate-400">
+                  Borra cable de R1. Espera 30s.
+                  <span
+                    class="text-white font-bold italic underline decoration-orange-500/50"
+                    >Internet debe funcionar por Router 2.</span
+                  >
+                </p>
+              </div>
+
+              <div
+                class="p-6 bg-white/5 rounded-2xl border-l-4 border-purple-500 lg:col-span-2"
+              >
+                <p
+                  class="text-purple-500 font-bold text-xs mb-2 uppercase tracking-widest uppercase italic tracking-tighter"
+                >
+                  05. Prueba de la Vuelta Larga (STP)
+                </p>
+                <p class="text-sm italic leading-relaxed text-slate-400">
+                  Borra el cable verde entre EV-L y GV-L. Espera a que el puerto
+                  naranja se ponga verde.
+                  <span
+                    class="text-white font-bold italic underline decoration-purple-500/50"
+                    >Deberías tener ping al West e Internet tras la convergencia
+                    de Spanning-Tree.</span
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer
+          class="py-10 text-center text-slate-600 text-[10px] font-mono tracking-[0.5em] uppercase italic underline decoration-blue-500/30 tracking-tight leading-none uppercase tracking-widest italic"
+        >
+          Cisco Lab Documentation System // 2026
+        </footer>
+      </main>
+    </div>
+  </body>
+</html>
+
+<style is:global>
+  html {
+    scroll-behavior: smooth;
+  }
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #020617;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #1e293b;
+    border-radius: 10px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #334155;
+  }
+</style>

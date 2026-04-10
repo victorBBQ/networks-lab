@@ -1,0 +1,19 @@
+---
+import Remember from "./Remember.astro";
+
+interface Props {
+  name: string;
+  location: string;
+}
+
+const { name, location } = Astro.props;
+---
+<div class="p-8 bg-slate-900/50 rounded-3xl border border-white/5 shadow-2xl">
+  <h3 class="mb-6 text-xl font-bold text-blue-500 uppercase">
+    {name} <span class="text-white font-medium">({location})</span>
+  </h3>
+
+  <div class="space-y-8 font-mono text-[12px] leading-relaxed">
+    <Remember />
+    <slot /> </div>
+</div>

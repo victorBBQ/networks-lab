@@ -1,0 +1,13 @@
+---
+// src/components/CliBlock.astro
+interface Props { title: string; }
+const { title } = Astro.props;
+---
+<div>
+  <p class="mb-2 text-emerald-400 font-bold tracking-widest uppercase italic underline decoration-emerald-500/30">
+    // {title}
+  </p>
+  <div class="p-4 text-blue-100 bg-black/40 rounded-xl border border-white/5 text-sm overflow-x-auto leading-tight space-y-0.5">
+    <slot />
+  </div>
+</div>

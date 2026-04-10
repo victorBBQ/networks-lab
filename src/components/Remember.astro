@@ -1,10 +1,15 @@
 ---
-const { reason } = Astro.props;
+import translations from "../data/languages.json";
+
+interface Props {
+  lang?: "es" | "de";
+}
+
+const { lang = "es" } = Astro.props;
+const t = translations[lang].common;
 ---
 <div class="mb-6 pl-3 border-l-2 border-blue-500/50">
-  <p class="text-[12px] text-white tracking-widest leading-relaxed italic uppercase">
-    Nota: Para configurar los siguientes comandos, active el modo de configuración global con 
-    <span class="text-blue-400 font-mono font-bold">configure terminal</span> o 
-    <span class="text-blue-400 font-mono font-bold">conf t</span> en el CLI.
+  <p class="text-[12px] text-white tracking-widest leading-relaxed italic">
+    {t.remember1}  <span class="text-blue-400">configure terminal</span> {t.remember2} <span class="text-blue-400">conf t</span> {t.remember3}
   </p>
 </div>

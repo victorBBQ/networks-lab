@@ -1013,16 +1013,18 @@ const t = translations[lang as "es" | "de"];
 
     function toggleMenu() {
       if (!aside || !overlay || !menuIcon) return;
+      
       const isHidden = aside.classList.contains('hidden');
+      
       if (isHidden) {
+        // ABRIR
         aside.classList.remove('hidden');
-        aside.classList.add('fixed', 'inset-y-0', 'left-0', 'w-[280px]', 'block');
         overlay.classList.remove('hidden');
         menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
         document.body.style.overflow = 'hidden';
       } else {
+        // CERRAR
         aside.classList.add('hidden');
-        aside.classList.remove('fixed', 'inset-y-0', 'left-0', 'w-[280px]', 'block');
         overlay.classList.add('hidden');
         menuIcon.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
         document.body.style.overflow = '';
@@ -1033,23 +1035,26 @@ const t = translations[lang as "es" | "de"];
     if(overlay) overlay.onclick = toggleMenu;
 
     // 3. SCROLL ACTIVO Y CIERRE LINKS
-    const navLinks = document.querySelectorAll('.nav-link');
+const navLinks = document.querySelectorAll('.nav-link');
     const sections = document.querySelectorAll('section[id]');
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => {
         if (e.isIntersecting) {
           navLinks.forEach(l => {
             l.classList.remove('active');
-            if (l.getAttribute('href') === `#${e.target.id}`) l.classList.add('active');
+            
+            // CORRECCIÓN: Buscamos si el href termina con el ID de la sección actual
+            const href = l.getAttribute('href');
+            if (href && href.endsWith(`#${e.target.id}`)) {
+              l.classList.add('active');
+            }
           });
         }
       });
     }, { rootMargin: '-20% 0px -70% 0px' });
-    sections.forEach(s => observer.observe(s));
 
-    navLinks.forEach(l => {
-      (l as HTMLElement).onclick = () => { if (window.innerWidth < 1024) toggleMenu(); };
-    });
+    sections.forEach(s => observer.observe(s));
 
     // 4. TOOLTIPS
     const reasons = translations[currentLang].reasons;
@@ -1071,6 +1076,22 @@ const t = translations[lang as "es" | "de"];
           tooltip.style.top = e.clientY + 15 + "px";
         };
         p.onmouseleave = () => tooltip.classList.add("hidden");
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 1024) {
+        // Si la pantalla es grande, nos aseguramos de que el aside NO esté oculto
+        // y que el body pueda hacer scroll
+        aside?.classList.remove('hidden');
+        overlay?.classList.add('hidden');
+        document.body.style.overflow = '';
+        
+        // Reseteamos el icono a hamburguesa por si acaso
+        if (menuIcon) menuIcon.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
+      } else {
+        // Si volvemos a móvil desde PC, lo ocultamos por defecto para evitar que se vea abierto
+        aside?.classList.add('hidden');
       }
     });
   </script>

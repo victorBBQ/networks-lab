@@ -326,7 +326,7 @@ import Remember from "../components/Remember.astro"
                       switchport port-security violation shutdown
                     </p>
                     <p class="pl-4">spanning-tree bpduguard enable</p>
-                    <p>exit</p>
+                    <p class="pl-4">exit</p>
                   </div>
                 </div>
 
@@ -406,7 +406,7 @@ import Remember from "../components/Remember.astro"
                       switchport port-security violation shutdown
                     </p>
                     <p class="pl-4">spanning-tree bpduguard enable</p>
-                    <p>exit</p>
+                    <p class="pl-4">exit</p>
                   </div>
                 </div>
 
@@ -575,7 +575,7 @@ import Remember from "../components/Remember.astro"
                         deny ip 10.0.0.0 0.0.255.255 10.0.99.0 0.0.0.255
                       </p>
                       <p class="pl-4">permit ip any any</p>
-                      <p>exit</p>
+                      <p class="pl-4">exit</p>
                       <br />
                       <p>interface vlan 99</p>
                       <p class="pl-4">ip access-group SERVER_SECURITY out</p>
@@ -845,7 +845,7 @@ import Remember from "../components/Remember.astro"
                         deny ip 10.0.0.0 0.0.255.255 10.0.99.0 0.0.0.255
                       </p>
                       <p class="pl-4">permit ip any any</p>
-                      <p>exit</p>
+                      <p class="pl-4">exit</p>
                       <br />
                       <p>interface vlan 99</p>
                       <p class="pl-4">ip access-group SERVER_SECURITY out</p>
@@ -1016,6 +1016,7 @@ import Remember from "../components/Remember.astro"
                 default-information originate (Nur auf Routern anwenden)
               </p>
               <p class="pl-4">no auto-summary</p>
+              <p class="pl-4">exit</p>
             </div>
           </div>
         </section>
@@ -1944,8 +1945,8 @@ import Remember from "../components/Remember.astro"
       "Fasst die gesamte Infrastruktur unter einer Ankündigung zusammen; neue VLANs werden automatisch im restlichen Netz bekannt.",
     "default-information originate (Nur auf Routern anwenden)":
       "Ermöglicht dem Router, seine Internetverbindung mit dem Rest des Netzes zu teilen.",
-    "ip route 10.0.0.0 255.255.0.0 192.168.18.1":
-      "Notwendige Rückroute im ISP-Router; ohne sie wüsste das Internet zwar, wie es zu Ihrer Firma kommt, aber die Pakete fänden den Weg nicht zurück.",
+    "ip route 10.0.0.0 255.255.0.0 192.168.18.1":"Notwendige Rückroute im ISP-Router; ohne sie wüsste das Internet zwar, wie es zu Ihrer Firma kommt, aber die Pakete fänden den Weg nicht zurück.",
+    "ip route 10.0.0.0 255.255.0.0 192.168.18.2":"Notwendige Rückroute im ISP-Router; ohne sie wüsste das Internet zwar, wie es zu Ihrer Firma kommt, aber die Pakete fänden den Weg nicht zurück.",
     "no auto-summary":
       "Verhindert, dass RIP VLAN 12 mit 22 verwechselt, indem es die Zusammenfassung stoppt; so behält jedes Gebäude seine Identität.",
 

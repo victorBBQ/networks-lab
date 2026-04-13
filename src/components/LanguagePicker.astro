@@ -1,0 +1,34 @@
+---
+// src/components/LanguagePicker.astro
+// Astro detecta el idioma actual por la URL para marcar el botón activo
+const { lang } = Astro.params; 
+---
+
+<div class="flex gap-2 mb-8 p-1 bg-white/5 rounded-lg border border-white/10">
+  <a
+    href="/networks-lab/es/"
+    class={`flex-1 py-1 text-[10px] font-bold rounded transition-all uppercase tracking-tighter text-center ${lang === 'es' ? 'active' : ''}`}
+  >
+    Español
+  </a>
+  <a
+    href="/networks-lab/de/"
+    class={`flex-1 py-1 text-[10px] font-bold rounded transition-all uppercase tracking-tighter text-center ${lang === 'de' ? 'active' : ''}`}
+  >
+    Deutsch
+  </a>
+</div>
+
+<style>
+  a {
+    color: #64748b; /* slate-500 */
+    text-decoration: none;
+  }
+  a:hover {
+    color: #f8fafc; /* slate-50 */
+  }
+  a.active {
+    background-color: rgba(59, 130, 246, 0.2); /* blue-500/20 */
+    color: #3b82f6; /* blue-500 */
+  }
+</style>

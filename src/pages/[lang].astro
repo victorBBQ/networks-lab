@@ -286,11 +286,13 @@ const t = translations[lang as "es" | "de"];
               <DeviceColumn name={side === "WEST" ? "SWITCH EV-L" : "SWITCH EV-R"} side={side} lang={lang}>
                 
                 <CliBlock title={t.sections.s03.vlan_title}>
-                  <p><p>vlan 8 name Management</p></p>
+                  <p><p>vlan 8</p></p>
+                  <p><p>name Management</p></p>
                   <p>
-                    {side === "WEST" 
-                      ? (lang === "es" ? "vlan 13 name West_Azul" : "vlan 13 name West_Blau") 
-                      : (lang === "es" ? "vlan 23 name Ost_Lila" : "vlan 23 name Ost_Lila")}
+                    {side === "WEST" ? "vlan 13" : "vlan 23"}
+                  </p>
+                  <p>
+                    {side === "WEST" ? "name West_Blau" : "name Ost_Lila" }
                   </p>
                 </CliBlock>
 
@@ -346,7 +348,8 @@ const t = translations[lang as "es" | "de"];
                 
                 <CliBlock title={t.sections.s04.l3_title}>
                   <p>ip routing</p>
-                  <p>vlan 8 name Management</p>
+                  <p><p>vlan 8</p></p>
+                  <p><p>name Management</p></p>
                   <p class="text-slate-500 font-sans italic">» {t.sections.s04.l3_note}</p>
                 </CliBlock>
 
@@ -617,7 +620,7 @@ const t = translations[lang as "es" | "de"];
                     access-list 1 permit 10.0.0.0 0.0.255.255
                   </p>
                   <p class="font-bold text-blue-400 italic">
-                    ip nat inside source list 1 [interfaz_internet] overload
+                    ip nat inside source list 1 [internet_interface] overload
                   </p>
                 </CliBlock>
 

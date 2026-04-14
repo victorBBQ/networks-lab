@@ -353,6 +353,19 @@ const t = translations[lang as "es" | "de"];
                   <p class="text-slate-500 font-sans italic">» {t.sections.s04.l3_note}</p>
                 </CliBlock>
 
+                <CliBlock title={t.sections.s03.security_title}>
+                  <p>interface range fa0/1 - 24 ({t.common.example})</p>
+                  <p class="pl-4">switchport mode access</p>
+                  <p class="pl-4">switchport access vlan {side === "WEST" ? "12" : "22"}</p>
+                  <p class="pl-4">spanning-tree portfast</p>
+                  <p class="pl-4">switchport port-security</p>
+                  <p class="pl-4">switchport port-security maximum 2</p>
+                  <p class="pl-4">switchport port-security mac-address sticky</p>
+                  <p class="pl-4">switchport port-security violation shutdown</p>
+                  <p class="pl-4">spanning-tree bpduguard enable</p>
+                  <p class="pl-4">exit</p>
+                </CliBlock>
+
                 <CliBlock title={t.sections.s04.hsrp_title}>
                   <p class="text-slate-500 italic">// {side === "WEST" ? t.sections.s04.hsrp_west_main : t.sections.s04.hsrp_ost_main}</p>
                   <p class={side === "WEST" ? "text-red-400" : "text-pink-400"}>interface vlan {side === "WEST" ? "12" : "22"}</p>
@@ -439,11 +452,13 @@ const t = translations[lang as "es" | "de"];
                 <CliBlock title={t.sections.s04.core_links_title}>
                   <p class="text-slate-500 italic">» {t.sections.s04.conn_bld}</p>
                   <p>interface range gig0/1-2 ({t.common.example})</p>
+                  <p class="pl-4">no switchport</p>
                   <p class="pl-4">channel-group 1 mode active</p>
                   <p class="pl-4">exit</p>
                   <br />
                   <p>interface port-channel 1</p>
                   <p class="pl-4">ip address 10.0.100.{side === "WEST" ? "1" : "2"} 255.255.255.252</p>
+                  <p class="pl-4">no shut</p>
                   <p class="pl-4">exit</p>
                   <br />
                   <p class="text-slate-500 italic">» {t.sections.s04.to_switch} {side === "WEST" ? "EV-L" : "EV-R"}</p>

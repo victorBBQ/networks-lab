@@ -5,6 +5,7 @@ import Remember from "../components/Remember.astro";
 import DeviceColumn from "../components/DeviceColumn.astro";
 import CliBlock from "../components/CliBlock.astro";
 import LanguagePicker from "../components/LanguagePicker.astro";
+import ModePicker from "../components/ModePicker.astro";
 
 export async function getStaticPaths() {
   return [
@@ -52,6 +53,7 @@ const t = translations[lang as "es" | "de"];
         </div>
 
         <LanguagePicker />
+        <ModePicker mode="l3" lang={lang as string} />
 
         <nav class="space-y-4 text-xs font-bold tracking-widest text-white/90 uppercase">
           <a href={`/networks-lab/${lang}/#szenario`} class="nav-link block hover:text-blue-400 transition">{t.nav.scenario}</a>
@@ -65,7 +67,7 @@ const t = translations[lang as "es" | "de"];
           <a href={`/networks-lab/${lang}/#servers`} class="nav-link block hover:text-blue-400 transition">{t.nav.servers}</a>
           <a href={`/networks-lab/${lang}/#laptops`} class="nav-link block hover:text-blue-400 transition">{t.nav.laptops}</a>
           <a href={`/networks-lab/${lang}/#wlan`} class="nav-link block hover:text-blue-400 transition">{t.nav.wireless}</a>
-          
+
           <div class="pt-4">
             <a href={`/networks-lab/${lang}/#verificacion`} class="nav-link block p-2 text-blue-400 text-center tracking-tighter border border-blue-400/20 rounded hover:bg-blue-400/10 transition uppercase">
               {t.nav.verify}
@@ -74,7 +76,7 @@ const t = translations[lang as "es" | "de"];
         </nav>
       </aside>
 
-      <main class="max-w-7xl w-full p-8 pt-20 lg:ml-80 lg:pt-16"> 
+      <main class="max-w-7xl w-full p-8 pt-20 lg:ml-80 lg:pt-16">
         <header class="mb-24">
                 <h1 class="mb-6 text-6xl font-black text-white tracking-tighter leading-none md:text-8xl">
                   {t.hero.title1} <span class="text-blue-500">{t.hero.title2}</span>
@@ -163,7 +165,7 @@ const t = translations[lang as "es" | "de"];
             </div>
             <div class="p-5 bg-red-900/10 bg-slate-900 rounded-xl border border-red-500/20">
               <p class="mb-2 text-[12px] text-red-400 font-mono uppercase">
-                VLAN 12 / 13
+                VLAN 11 / 12
               </p>
               <p class="font-bold text-red-100 uppercase italic">
                 {t.sections.s01.v12}
@@ -173,7 +175,7 @@ const t = translations[lang as "es" | "de"];
               class="p-5 bg-pink-900/10 bg-slate-900 rounded-xl border border-pink-500/20"
             >
               <p class="mb-2 text-[12px] text-pink-400 font-mono uppercase">
-                VLAN 22 / 23
+                VLAN 21 / 22
               </p>
               <p class="font-bold text-pink-100 uppercase italic">
                 {t.sections.s01.v22}
@@ -284,12 +286,12 @@ const t = translations[lang as "es" | "de"];
           <div class="grid gap-8 lg:grid-cols-2">
             {["WEST", "OST"].map((side) => (
               <DeviceColumn name={side === "WEST" ? "SWITCH EV-L" : "SWITCH EV-R"} side={side} lang={lang as "es" | "de"}>
-                
+
                 <CliBlock title={t.sections.s03.vlan_title}>
                   <p><p>vlan 8</p></p>
                   <p><p>name Management</p></p>
                   <p>
-                    {side === "WEST" ? "vlan 13" : "vlan 23"}
+                    {side === "WEST" ? "vlan 12" : "vlan 22"}
                   </p>
                   <p>
                     {side === "WEST" ? "name West_Blau" : "name Ost_Lila" }
@@ -299,7 +301,7 @@ const t = translations[lang as "es" | "de"];
                 <CliBlock title={t.sections.s03.security_title}>
                   <p>interface range fa0/1 - 24</p>
                   <p class="pl-4">switchport mode access</p>
-                  <p class="pl-4">switchport access vlan {side === "WEST" ? "13" : "23"}</p>
+                  <p class="pl-4">switchport access vlan {side === "WEST" ? "12" : "22"}</p>
                   <p class="pl-4">spanning-tree portfast</p>
                   <p class="pl-4">switchport port-security</p>
                   <p class="pl-4">switchport port-security maximum 2</p>
@@ -331,7 +333,7 @@ const t = translations[lang as "es" | "de"];
                   <br />
                   <p>ip default-gateway 10.0.8.1</p>
                 </CliBlock>
-                
+
               </DeviceColumn>
             ))}
           </div>
@@ -345,7 +347,7 @@ const t = translations[lang as "es" | "de"];
           <div class="grid gap-8 lg:grid-cols-2">
             {["WEST", "OST"].map((side) => (
               <DeviceColumn name={side === "WEST" ? "SWITCH GV-L" : "SWITCH GV-R"} side={side} lang={lang as "es" | "de"}>
-                
+
                 <CliBlock title={t.sections.s04.l3_title}>
                   <p>ip routing</p>
                   <p><p>vlan 8</p></p>
@@ -356,7 +358,7 @@ const t = translations[lang as "es" | "de"];
                 <CliBlock title={t.sections.s03.security_title}>
                   <p>interface range fa0/1 - 24 ({t.common.example})</p>
                   <p class="pl-4">switchport mode access</p>
-                  <p class="pl-4">switchport access vlan {side === "WEST" ? "12" : "22"}</p>
+                  <p class="pl-4">switchport access vlan {side === "WEST" ? "11" : "21"}</p>
                   <p class="pl-4">spanning-tree portfast</p>
                   <p class="pl-4">switchport port-security</p>
                   <p class="pl-4">switchport port-security maximum 2</p>
@@ -368,6 +370,14 @@ const t = translations[lang as "es" | "de"];
 
                 <CliBlock title={t.sections.s04.hsrp_title}>
                   <p class="text-slate-500 italic">// {side === "WEST" ? t.sections.s04.hsrp_west_main : t.sections.s04.hsrp_ost_main}</p>
+                  <p class={side === "WEST" ? "text-red-400" : "text-pink-400"}>interface vlan {side === "WEST" ? "11" : "21"}</p>
+                  <p class="pl-4">ip address {side === "WEST" ? "10.0.11.2" : "10.0.21.2"} 255.255.255.0</p>
+                  <p class="pl-4">standby {side === "WEST" ? "11" : "21"} ip 10.0.{side === "WEST" ? "11" : "21"}.1</p>
+                  <p class="pl-4">standby {side === "WEST" ? "11" : "21"} priority 110</p>
+                  <p class="pl-4">standby {side === "WEST" ? "11" : "21"} preempt</p>
+                  <p class="pl-4">no shut</p>
+                  <p class="pl-4">exit</p>
+                  <br />
                   <p class={side === "WEST" ? "text-red-400" : "text-pink-400"}>interface vlan {side === "WEST" ? "12" : "22"}</p>
                   <p class="pl-4">ip address {side === "WEST" ? "10.0.12.2" : "10.0.22.2"} 255.255.255.0</p>
                   <p class="pl-4">standby {side === "WEST" ? "12" : "22"} ip 10.0.{side === "WEST" ? "12" : "22"}.1</p>
@@ -376,28 +386,20 @@ const t = translations[lang as "es" | "de"];
                   <p class="pl-4">no shut</p>
                   <p class="pl-4">exit</p>
                   <br />
-                  <p class={side === "WEST" ? "text-red-400" : "text-pink-400"}>interface vlan {side === "WEST" ? "13" : "23"}</p>
-                  <p class="pl-4">ip address {side === "WEST" ? "10.0.13.2" : "10.0.23.2"} 255.255.255.0</p>
-                  <p class="pl-4">standby {side === "WEST" ? "13" : "23"} ip 10.0.{side === "WEST" ? "13" : "23"}.1</p>
-                  <p class="pl-4">standby {side === "WEST" ? "13" : "23"} priority 110</p>
-                  <p class="pl-4">standby {side === "WEST" ? "13" : "23"} preempt</p>
+                  <p class="text-slate-500 italic">// {side === "WEST" ? t.sections.s04.hsrp_west_back : t.sections.s04.hsrp_ost_back}</p>
+                  <p class={side === "WEST" ? "text-pink-400" : "text-red-400"}>interface vlan {side === "WEST" ? "21" : "11"}</p>
+                  <p class="pl-4">ip address {side === "WEST" ? "10.0.21.3" : "10.0.11.3"} 255.255.255.0</p>
+                  <p class="pl-4">standby {side === "WEST" ? "21" : "11"} ip 10.0.{side === "WEST" ? "21" : "11"}.1</p>
+                  <p class="pl-4">standby {side === "WEST" ? "21" : "11"} priority 100</p>
+                  <p class="pl-4">standby {side === "WEST" ? "21" : "11"} preempt</p>
                   <p class="pl-4">no shut</p>
                   <p class="pl-4">exit</p>
                   <br />
-                  <p class="text-slate-500 italic">// {side === "WEST" ? t.sections.s04.hsrp_west_back : t.sections.s04.hsrp_ost_back}</p>
                   <p class={side === "WEST" ? "text-pink-400" : "text-red-400"}>interface vlan {side === "WEST" ? "22" : "12"}</p>
                   <p class="pl-4">ip address {side === "WEST" ? "10.0.22.3" : "10.0.12.3"} 255.255.255.0</p>
                   <p class="pl-4">standby {side === "WEST" ? "22" : "12"} ip 10.0.{side === "WEST" ? "22" : "12"}.1</p>
                   <p class="pl-4">standby {side === "WEST" ? "22" : "12"} priority 100</p>
                   <p class="pl-4">standby {side === "WEST" ? "22" : "12"} preempt</p>
-                  <p class="pl-4">no shut</p>
-                  <p class="pl-4">exit</p>
-                  <br />
-                  <p class={side === "WEST" ? "text-pink-400" : "text-red-400"}>interface vlan {side === "WEST" ? "23" : "13"}</p>
-                  <p class="pl-4">ip address {side === "WEST" ? "10.0.23.3" : "10.0.13.3"} 255.255.255.0</p>
-                  <p class="pl-4">standby {side === "WEST" ? "23" : "13"} ip 10.0.{side === "WEST" ? "23" : "13"}.1</p>
-                  <p class="pl-4">standby {side === "WEST" ? "23" : "13"} priority 100</p>
-                  <p class="pl-4">standby {side === "WEST" ? "23" : "13"} preempt</p>
                   <p class="pl-4">no shut</p>
                   <p class="pl-4">exit</p>
                   <br />
@@ -433,19 +435,19 @@ const t = translations[lang as "es" | "de"];
                   <br />
                   <p class="text-slate-500 italic">» {t.sections.s04.acl_isol}</p>
                   <p>ip access-list extended {side === "WEST" ? "ACL_WEST" : "ACL_OST"}</p>
-                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "12" : "22"}.0 0.0.1.255 10.0.8.0 0.0.0.255</p>
-                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "12" : "22"}.0 0.0.1.255 10.0.99.0 0.0.0.255</p>
-                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "12" : "22"}.0 0.0.1.255 10.0.{side === "WEST" ? "22" : "12"}.0 0.0.1.255</p>
-                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "12" : "22"}.0 0.0.0.255 10.0.{side === "WEST" ? "13" : "23"}.0 0.0.0.255</p>
-                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "13" : "23"}.0 0.0.0.255 10.0.{side === "WEST" ? "12" : "22"}.0 0.0.0.255</p>
-                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "22" : "12"}.0 0.0.1.255 10.0.{side === "WEST" ? "12" : "22"}.0 0.0.1.255 ({t.common.fail})</p>
+                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "11" : "21"}.0 0.0.1.255 10.0.8.0 0.0.0.255</p>
+                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "11" : "21"}.0 0.0.1.255 10.0.99.0 0.0.0.255</p>
+                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "11" : "21"}.0 0.0.1.255 10.0.{side === "WEST" ? "21" : "11"}.0 0.0.1.255</p>
+                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "11" : "21"}.0 0.0.0.255 10.0.{side === "WEST" ? "12" : "22"}.0 0.0.0.255</p>
+                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "12" : "22"}.0 0.0.0.255 10.0.{side === "WEST" ? "11" : "21"}.0 0.0.0.255</p>
+                  <p class="pl-4">deny ip 10.0.{side === "WEST" ? "21" : "11"}.0 0.0.1.255 10.0.{side === "WEST" ? "11" : "21"}.0 0.0.1.255 ({t.common.fail})</p>
                   <p class="pl-4">permit ip any any</p>
                   <p class="pl-4">exit</p>
                   <br />
                   <p class="text-slate-500 italic">// {t.sections.s04.acl_apply} {side}</p>
-                  <p>interface vlan {side === "WEST" ? "12" : "22"}</p>
+                  <p>interface vlan {side === "WEST" ? "11" : "21"}</p>
                   <p class="pl-4">ip access-group {side === "WEST" ? "ACL_WEST" : "ACL_OST"} in</p>
-                  <p>interface vlan {side === "WEST" ? "13" : "23"}</p>
+                  <p>interface vlan {side === "WEST" ? "12" : "22"}</p>
                   <p class="pl-4">ip access-group {side === "WEST" ? "ACL_WEST" : "ACL_OST"} in</p>
                 </CliBlock>
 
@@ -471,7 +473,7 @@ const t = translations[lang as "es" | "de"];
                   <p class="text-slate-500 italic">» {t.sections.s04.to_router} {side === "WEST" ? "1" : "2"}</p>
                   <p>interface gig0/3 ({t.common.example})</p>
                   <p class="pl-4">no switchport</p>
-                  <p class="pl-4">ip address 10.0.{side === "WEST" ? "1" : "2"}.2 255.255.255.252</p>
+                  <p class="pl-4">ip address 10.0.{side === "WEST" ? "10" : "20"}.2 255.255.255.252</p>
                   <p class="pl-4">no shut</p>
                   <p class="pl-4">exit</p>
                 </CliBlock>
@@ -479,30 +481,30 @@ const t = translations[lang as "es" | "de"];
                 <CliBlock title={t.sections.s04.dhcp_title}>
                   <p class="text-slate-500 italic">» {t.sections.s04.dhcp_excl}</p>
                   <p>ip dhcp excluded-address 10.0.8.1 10.0.8.20</p>
+                  <p>ip dhcp excluded-address 10.0.11.1 10.0.11.20</p>
                   <p>ip dhcp excluded-address 10.0.12.1 10.0.12.20</p>
-                  <p>ip dhcp excluded-address 10.0.13.1 10.0.13.20</p>
+                  <p>ip dhcp excluded-address 10.0.21.1 10.0.21.20</p>
                   <p>ip dhcp excluded-address 10.0.22.1 10.0.22.20</p>
-                  <p>ip dhcp excluded-address 10.0.23.1 10.0.23.20</p>
                   <br />
                   <p class="text-slate-500 italic">» {t.sections.s04.dhcp_pools}</p>
-                  <p>ip dhcp pool POOL_V12_WEST_RED</p>
+                  <p>ip dhcp pool POOL_V11_WEST_RED</p>
+                  <p class="pl-4">network 10.0.11.0 255.255.255.0</p>
+                  <p class="pl-4">default-router 10.0.11.1</p>
+                  <p class="pl-4">dns-server 8.8.8.8</p>
+                  <br />
+                  <p>ip dhcp pool POOL_V12_WEST_BLUE</p>
                   <p class="pl-4">network 10.0.12.0 255.255.255.0</p>
                   <p class="pl-4">default-router 10.0.12.1</p>
                   <p class="pl-4">dns-server 8.8.8.8</p>
                   <br />
-                  <p>ip dhcp pool POOL_V13_WEST_BLUE</p>
-                  <p class="pl-4">network 10.0.13.0 255.255.255.0</p>
-                  <p class="pl-4">default-router 10.0.13.1</p>
+                  <p>ip dhcp pool POOL_V21_OST_PINK</p>
+                  <p class="pl-4">network 10.0.21.0 255.255.255.0</p>
+                  <p class="pl-4">default-router 10.0.21.1</p>
                   <p class="pl-4">dns-server 8.8.8.8</p>
                   <br />
-                  <p>ip dhcp pool POOL_V22_OST_PINK</p>
+                  <p>ip dhcp pool POOL_V22_OST_PURPLE</p>
                   <p class="pl-4">network 10.0.22.0 255.255.255.0</p>
                   <p class="pl-4">default-router 10.0.22.1</p>
-                  <p class="pl-4">dns-server 8.8.8.8</p>
-                  <br />
-                  <p>ip dhcp pool POOL_V23_OST_PURPLE</p>
-                  <p class="pl-4">network 10.0.23.0 255.255.255.0</p>
-                  <p class="pl-4">default-router 10.0.23.1</p>
                   <p class="pl-4">dns-server 8.8.8.8</p>
                   <br />
                   <p>ip dhcp pool POOL_MGMT</p>
@@ -512,16 +514,16 @@ const t = translations[lang as "es" | "de"];
                   <p class="text-slate-500 italic">» {t.sections.s04.dhcp_relay}</p>
                   <p>interface vlan 8</p>
                   <p class="pl-4">ip helper-address {side === "WEST" ? "10.0.99.3" : "10.0.99.2"}</p>
+                  <p>interface vlan 11</p>
+                  <p class="pl-4">ip helper-address {side === "WEST" ? "10.0.99.3" : "10.0.99.2"}</p>
                   <p>interface vlan 12</p>
                   <p class="pl-4">ip helper-address {side === "WEST" ? "10.0.99.3" : "10.0.99.2"}</p>
-                  <p>interface vlan 13</p>
+                  <p>interface vlan 21</p>
                   <p class="pl-4">ip helper-address {side === "WEST" ? "10.0.99.3" : "10.0.99.2"}</p>
                   <p>interface vlan 22</p>
                   <p class="pl-4">ip helper-address {side === "WEST" ? "10.0.99.3" : "10.0.99.2"}</p>
-                  <p>interface vlan 23</p>
-                  <p class="pl-4">ip helper-address {side === "WEST" ? "10.0.99.3" : "10.0.99.2"}</p>
                 </CliBlock>
-                
+
               </DeviceColumn>
             ))}
           </div>
@@ -561,16 +563,16 @@ const t = translations[lang as "es" | "de"];
           <div class="grid gap-8 lg:grid-cols-2">
             {["WEST", "OST"].map((side) => (
               <DeviceColumn name={side === "WEST" ? "SWITCH GV-L" : "SWITCH GV-R"} side={side} lang={lang as "es" | "de"}>
-                
+
                 <CliBlock title={side === "WEST" ? t.sections.s06.west_to_ost : t.sections.s06.ost_to_west}>
+                  <p class="text-sm">
+                    ip route {side === "WEST" ? "10.0.21.0 255.255.255.0 10.0.100.2" : "10.0.11.0 255.255.255.0 10.0.100.1"}
+                  </p>
                   <p class="text-sm">
                     ip route {side === "WEST" ? "10.0.22.0 255.255.255.0 10.0.100.2" : "10.0.12.0 255.255.255.0 10.0.100.1"}
                   </p>
-                  <p class="text-sm">
-                    ip route {side === "WEST" ? "10.0.23.0 255.255.255.0 10.0.100.2" : "10.0.13.0 255.255.255.0 10.0.100.1"}
-                  </p>
                   <p class="text-orange-400 font-bold italic text-[13px]">
-                    ip route {side === "WEST" ? "10.0.13.0 255.255.255.0 10.0.100.2 20" : "10.0.23.0 255.255.255.0 10.0.100.1 20"} ({t.common.fail})
+                    ip route {side === "WEST" ? "10.0.12.0 255.255.255.0 10.0.100.2 20" : "10.0.22.0 255.255.255.0 10.0.100.1 20"} ({t.common.fail})
                   </p>
                 </CliBlock>
 
@@ -599,9 +601,9 @@ const t = translations[lang as "es" | "de"];
           </h2>
 
           <div class="grid gap-8 lg:grid-cols-2">
-            {["1", "2"].map((num) => (
-              <DeviceColumn name={`ROUTER ${num}`} side={num === "1" ? "WEST" : "OST"} lang={lang as "es" | "de"}>
-                
+            {["10", "20"].map((num) => (
+              <DeviceColumn name={`ROUTER ${num}`} side={num === "10" ? "WEST" : "OST"} lang={lang as "es" | "de"}>
+
                 <CliBlock title={t.sections.s07.int_title}>
                   <p class="text-slate-500 italic">» {t.sections.s07.to_lan}</p>
                   <p>interface f0/1</p>
@@ -622,7 +624,7 @@ const t = translations[lang as "es" | "de"];
 
                 <CliBlock title={t.sections.s07.routes_title}>
                   <p class="text-slate-500 italic">» {t.sections.s07.out_world}</p>
-                  <p>ip route 0.0.0.0 0.0.0.0 {num === "1" ? "[IP_ISP]" : "[IP_ISP_R2]"}</p>
+                  <p>ip route 0.0.0.0 0.0.0.0 {num === "10" ? "[IP_ISP]" : "[IP_ISP_R2]"}</p>
                   <br />
                   <p class="text-orange-400 font-bold italic underline decoration-orange-500/30">
                     » {t.sections.s07.return_path}
@@ -648,7 +650,7 @@ const t = translations[lang as "es" | "de"];
           <h2 class="mb-10 pl-4 text-3xl font-bold text-white tracking-tighter border-l-4 border-blue-500 uppercase">
             {t.sections.s08.title}
           </h2>
-          
+
           <div class="grid gap-8 md:grid-cols-2">
             {["WEST", "OST"].map((side) => (
               <div class={`p-8 bg-slate-900 rounded-3xl border ${side === "WEST" ? "border-emerald-500/20" : "border-pink-500/20"} shadow-2xl`}>
@@ -660,18 +662,18 @@ const t = translations[lang as "es" | "de"];
                     {side === "WEST" ? t.sections.s08.dc_a : t.sections.s08.dc_b}
                   </span>
                 </div>
-                
+
                 <ul class="space-y-3 text-sm text-slate-400 font-mono">
                   <li class="flex justify-between border-b border-white/5 pb-1">
-                    <span>{t.sections.s09.ip}:</span> 
+                    <span>{t.sections.s09.ip}:</span>
                     <span class="text-white">{side === "WEST" ? "10.0.99.10" : "10.0.99.20"}</span>
                   </li>
                   <li class="flex justify-between border-b border-white/5 pb-1">
-                    <span>{t.sections.s09.mask}:</span> 
+                    <span>{t.sections.s09.mask}:</span>
                     <span class="text-white">255.255.255.0</span>
                   </li>
                   <li class="flex justify-between border-b border-white/5 pb-1">
-                    <span>{t.sections.s09.gw}:</span> 
+                    <span>{t.sections.s09.gw}:</span>
                     <span class="text-white">10.0.99.1</span>
                   </li>
                 </ul>
@@ -682,7 +684,7 @@ const t = translations[lang as "es" | "de"];
                     <p class="text-sm text-slate-300 italic">- <strong>SYSLOG:</strong> {t.sections.s08.syslog_desc} {side === "WEST" ? "GV-L y EV-L" : "GV-R y EV-R"}.</p>
                     <p class="text-sm text-slate-300 italic">- <strong>NTP:</strong> {t.sections.s08.ntp_desc} {side === "WEST" ? t.sections.s08.reg_west : t.sections.s08.reg_ost}.</p>
                   </div>
-                  
+
                   <div class="pt-4 border-t border-white/5">
                     <p class="text-[12px] text-blue-400 font-bold uppercase mb-2">// {t.sections.s08.manual_title}</p>
                     <ul class="text-[12px] text-slate-400 space-y-1 italic">
@@ -764,7 +766,7 @@ const t = translations[lang as "es" | "de"];
               <p
                 class="text-xs text-slate-400 tracking-tight leading-relaxed italic uppercase"
               >
-                {t.sections.s10.conn_text1} <span class="text-blue-400">Switch EV-R</span>{t.sections.s10.conn_text2} <span class="text-white">VLAN 23</span>.
+                {t.sections.s10.conn_text1} <span class="text-blue-400">Switch EV-R</span>{t.sections.s10.conn_text2} <span class="text-white">VLAN 22</span>.
               </p>
               <div
                 class="mt-4 p-4 bg-black/40 rounded-xl font-mono text-sm text-blue-100"
@@ -772,7 +774,7 @@ const t = translations[lang as "es" | "de"];
                 <p>! Configuración en Switch EV-R</p>
                 <p>interface fa0/24</p>
                 <p class="pl-4">switchport mode access</p>
-                <p class="pl-4">switchport access vlan 23</p>
+                <p class="pl-4">switchport access vlan 22</p>
                 <p class="pl-4">spanning-tree portfast</p>
               </div>
             </div>
@@ -798,7 +800,7 @@ const t = translations[lang as "es" | "de"];
                 </li>
                 <li class="flex pb-1 border-b border-white/5 justify-between">
                   <span>{t.sections.s10.dhcp_srv}</span>
-                  <span class="text-blue-400">GV-R (VLAN 23)</span>
+                  <span class="text-blue-400">GV-R (VLAN 22)</span>
                 </li>
                 <li class="flex justify-between">
                   <span>{t.sections.s10.ap_mode}</span>
@@ -1032,9 +1034,9 @@ const t = translations[lang as "es" | "de"];
 
     function toggleMenu() {
       if (!aside || !overlay || !menuIcon) return;
-      
+
       const isHidden = aside.classList.contains('hidden');
-      
+
       if (isHidden) {
         // ABRIR
         aside.classList.remove('hidden');
@@ -1062,7 +1064,7 @@ const navLinks = document.querySelectorAll('.nav-link');
         if (e.isIntersecting) {
           navLinks.forEach(l => {
             l.classList.remove('active');
-            
+
             // CORRECCIÓN: Buscamos si el href termina con el ID de la sección actual
             const href = l.getAttribute('href');
             if (href && href.endsWith(`#${e.target.id}`)) {
@@ -1105,7 +1107,7 @@ const navLinks = document.querySelectorAll('.nav-link');
         aside?.classList.remove('hidden');
         overlay?.classList.add('hidden');
         document.body.style.overflow = '';
-        
+
         // Reseteamos el icono a hamburguesa por si acaso
         if (menuIcon) menuIcon.setAttribute('d', 'M4 6h16M4 12h16m-7 6h7');
       } else {

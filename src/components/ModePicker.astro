@@ -1,0 +1,36 @@
+---
+interface Props {
+  mode: "l3" | "roas";
+  lang: string;
+}
+const { mode, lang } = Astro.props;
+---
+
+<div class="flex gap-2 mb-4 p-1 bg-white/5 rounded-lg border border-white/10">
+  <a
+    href={`/networks-lab/${lang}/`}
+    class={`flex-1 py-1.5 text-[10px] font-bold rounded transition-all uppercase tracking-tighter text-center ${mode === 'l3' ? 'active' : ''}`}
+  >
+    Collapsed Core (L3)
+  </a>
+  <a
+    href={`/networks-lab/roas/${lang}/`}
+    class={`flex-1 py-1.5 text-[10px] font-bold rounded transition-all uppercase tracking-tighter text-center ${mode === 'roas' ? 'active' : ''}`}
+  >
+    Router on a Stick
+  </a>
+</div>
+
+<style>
+  a {
+    color: #64748b;
+    text-decoration: none;
+  }
+  a:hover {
+    color: #f8fafc;
+  }
+  a.active {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #3b82f6;
+  }
+</style>

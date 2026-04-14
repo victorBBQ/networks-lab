@@ -1,6 +1,9 @@
 {
   "es": {
+<<<<<<< HEAD
     "title": "Guía de Red",
+=======
+>>>>>>> 6e0f9e3e166912305482bd87d32d6e38718e2f7d
     "nav": {
       "scenario": "00. Escenario",
       "design": "01. Diseño e IPs",
@@ -309,7 +312,10 @@
     }
   },
   "de": {
+<<<<<<< HEAD
     "title": "Netzwerk-Leitfaden",
+=======
+>>>>>>> 6e0f9e3e166912305482bd87d32d6e38718e2f7d
     "nav": {
       "scenario": "00. Szenario",
       "design": "01. Design & IPs",

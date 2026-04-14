@@ -283,7 +283,7 @@ const t = translations[lang as "es" | "de"];
           </h2>
           <div class="grid gap-8 lg:grid-cols-2">
             {["WEST", "OST"].map((side) => (
-              <DeviceColumn name={side === "WEST" ? "SWITCH EV-L" : "SWITCH EV-R"} side={side} lang={lang}>
+              <DeviceColumn name={side === "WEST" ? "SWITCH EV-L" : "SWITCH EV-R"} side={side} lang={lang as "es" | "de"}>
                 
                 <CliBlock title={t.sections.s03.vlan_title}>
                   <p><p>vlan 8</p></p>
@@ -344,7 +344,7 @@ const t = translations[lang as "es" | "de"];
 
           <div class="grid gap-8 lg:grid-cols-2">
             {["WEST", "OST"].map((side) => (
-              <DeviceColumn name={side === "WEST" ? "SWITCH GV-L" : "SWITCH GV-R"} side={side} lang={lang}>
+              <DeviceColumn name={side === "WEST" ? "SWITCH GV-L" : "SWITCH GV-R"} side={side} lang={lang as "es" | "de"}>
                 
                 <CliBlock title={t.sections.s04.l3_title}>
                   <p>ip routing</p>
@@ -522,7 +522,7 @@ const t = translations[lang as "es" | "de"];
             >
               {t.sections.s05.subtitle}
             </p>
-            <Remember lang={lang}/>
+            <Remember lang={lang as "es" | "de"}/>
             <div
               class="p-6 font-mono text-sm text-white bg-black/40 rounded-xl space-y-1"
             >
@@ -545,7 +545,7 @@ const t = translations[lang as "es" | "de"];
 
           <div class="grid gap-8 lg:grid-cols-2">
             {["WEST", "OST"].map((side) => (
-              <DeviceColumn name={side === "WEST" ? "SWITCH GV-L" : "SWITCH GV-R"} side={side} lang={lang}>
+              <DeviceColumn name={side === "WEST" ? "SWITCH GV-L" : "SWITCH GV-R"} side={side} lang={lang as "es" | "de"}>
                 
                 <CliBlock title={side === "WEST" ? t.sections.s06.west_to_ost : t.sections.s06.ost_to_west}>
                   <p class="text-sm">
@@ -585,7 +585,7 @@ const t = translations[lang as "es" | "de"];
 
           <div class="grid gap-8 lg:grid-cols-2">
             {["1", "2"].map((num) => (
-              <DeviceColumn name={`ROUTER ${num}`} side={num === "1" ? "WEST" : "OST"} lang={lang}>
+              <DeviceColumn name={`ROUTER ${num}`} side={num === "1" ? "WEST" : "OST"} lang={lang as "es" | "de"}>
                 
                 <CliBlock title={t.sections.s07.int_title}>
                   <p class="text-slate-500 italic">» {t.sections.s07.to_lan}</p>

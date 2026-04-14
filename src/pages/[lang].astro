@@ -20,11 +20,7 @@ const t = translations[lang as "es" | "de"];
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
-<<<<<<< HEAD
     <title> {t.title} | Cisco Lab</title>
-=======
-    <title>Guía de Red | Cisco Lab</title>
->>>>>>> 6e0f9e3e166912305482bd87d32d6e38718e2f7d
     <link
       href="https://fonts.googleapis.com/css2?family=Fira+Code&family=Inter:wght@400;700;900&display=swap"
       rel="stylesheet"
@@ -290,7 +286,6 @@ const t = translations[lang as "es" | "de"];
               <DeviceColumn name={side === "WEST" ? "SWITCH EV-L" : "SWITCH EV-R"} side={side} lang={lang}>
                 
                 <CliBlock title={t.sections.s03.vlan_title}>
-<<<<<<< HEAD
                   <p><p>vlan 8</p></p>
                   <p><p>name Management</p></p>
                   <p>
@@ -298,13 +293,6 @@ const t = translations[lang as "es" | "de"];
                   </p>
                   <p>
                     {side === "WEST" ? "name West_Blau" : "name Ost_Lila" }
-=======
-                  <p><p>vlan 8 name Management</p></p>
-                  <p>
-                    {side === "WEST" 
-                      ? (lang === "es" ? "vlan 13 name West_Azul" : "vlan 13 name West_Blau") 
-                      : (lang === "es" ? "vlan 23 name Ost_Lila" : "vlan 23 name Ost_Lila")}
->>>>>>> 6e0f9e3e166912305482bd87d32d6e38718e2f7d
                   </p>
                 </CliBlock>
 
@@ -360,12 +348,8 @@ const t = translations[lang as "es" | "de"];
                 
                 <CliBlock title={t.sections.s04.l3_title}>
                   <p>ip routing</p>
-<<<<<<< HEAD
                   <p><p>vlan 8</p></p>
                   <p><p>name Management</p></p>
-=======
-                  <p>vlan 8 name Management</p>
->>>>>>> 6e0f9e3e166912305482bd87d32d6e38718e2f7d
                   <p class="text-slate-500 font-sans italic">» {t.sections.s04.l3_note}</p>
                 </CliBlock>
 
@@ -636,11 +620,7 @@ const t = translations[lang as "es" | "de"];
                     access-list 1 permit 10.0.0.0 0.0.255.255
                   </p>
                   <p class="font-bold text-blue-400 italic">
-<<<<<<< HEAD
                     ip nat inside source list 1 [internet_interface] overload
-=======
-                    ip nat inside source list 1 [interfaz_internet] overload
->>>>>>> 6e0f9e3e166912305482bd87d32d6e38718e2f7d
                   </p>
                 </CliBlock>
 

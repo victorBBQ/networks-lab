@@ -288,8 +288,8 @@ const t = translations[lang as "es" | "de"];
               <DeviceColumn name={side === "WEST" ? "SWITCH EV-L" : "SWITCH EV-R"} side={side} lang={lang as "es" | "de"}>
 
                 <CliBlock title={t.sections.s03.vlan_title}>
-                  <p><p>vlan 8</p></p>
-                  <p><p>name Management</p></p>
+                  <p>vlan 8</p>
+                  <p>name Management</p>
                   <p>
                     {side === "WEST" ? "vlan 12" : "vlan 22"}
                   </p>
@@ -350,8 +350,8 @@ const t = translations[lang as "es" | "de"];
 
                 <CliBlock title={t.sections.s04.l3_title}>
                   <p>ip routing</p>
-                  <p><p>vlan 8</p></p>
-                  <p><p>name Management</p></p>
+                  <p>vlan 8</p>
+                  <p>name Management</p>
                   <p class="text-slate-500 font-sans italic">» {t.sections.s04.l3_note}</p>
                 </CliBlock>
 
@@ -771,7 +771,7 @@ const t = translations[lang as "es" | "de"];
               <div
                 class="mt-4 p-4 bg-black/40 rounded-xl font-mono text-sm text-blue-100"
               >
-                <p>! Configuración en Switch EV-R</p>
+                <p>! {lang === "es" ? "Configuración en Switch EV-R" : "Konfiguration auf Switch EV-R"}</p>
                 <p>interface fa0/24</p>
                 <p class="pl-4">switchport mode access</p>
                 <p class="pl-4">switchport access vlan 22</p>
@@ -988,7 +988,7 @@ const t = translations[lang as "es" | "de"];
         </section>
 
         <footer
-          class="py-10 text-center text-slate-600 text-[10px] font-mono tracking-[0.5em] tracking-tight leading-none tracking-widest uppercase italic underline decoration-blue-500/30 uppercase italic"
+          class="py-10 text-center text-slate-600 text-[10px] font-mono tracking-widest leading-none uppercase italic underline decoration-blue-500/30"
         >
           {t.common.footer}
         </footer>

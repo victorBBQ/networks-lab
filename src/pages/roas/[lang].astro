@@ -573,14 +573,14 @@ const r = translations[`roas_${lang}` as "roas_es" | "roas_de"];
 
         <!-- VERIFICACIÓN -->
         <section id="verificacion" class="mb-32">
-          <div class="p-12 bg-slate-900/20 border-2 border-dashed border-slate-700 rounded-[3.5rem] shadow-2xl">
+          <div class="p-6 md:p-12 bg-slate-900/20 border-2 border-dashed border-slate-700 rounded-[3.5rem] shadow-2xl">
             <h2 class="mb-10 text-4xl font-black text-white text-center tracking-tighter uppercase italic">
               {t.sections.verify_section.title}
               <span class="text-blue-500 underline decoration-blue-500 underline-offset-8">{lang === "es" ? "Éxito" : "Erfolgs"}</span>
             </h2>
 
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-              <div class="p-6 bg-white/5 rounded-2xl border-l-4 border-blue-500">
+              <div class="p-4 md:p-6 bg-white/5 rounded-2xl border-l-4 border-blue-500">
                 <p class="mb-2 text-blue-500 font-bold text-xs tracking-widest uppercase">
                   {t.sections.verify_section.p1_title}
                 </p>
@@ -590,7 +590,7 @@ const r = translations[`roas_${lang}` as "roas_es" | "roas_de"];
                 </p>
               </div>
 
-              <div class="p-6 bg-white/5 rounded-2xl border-l-4 border-emerald-500">
+              <div class="p-4 md:p-6 bg-white/5 rounded-2xl border-l-4 border-emerald-500">
                 <p class="mb-2 text-emerald-500 font-bold text-xs tracking-widest uppercase">
                   {t.sections.verify_section.p2_title}
                 </p>
@@ -600,7 +600,7 @@ const r = translations[`roas_${lang}` as "roas_es" | "roas_de"];
                 </p>
               </div>
 
-              <div class="p-6 bg-white/5 rounded-2xl border-l-4 border-pink-500">
+              <div class="p-4 md:p-6 bg-white/5 rounded-2xl border-l-4 border-pink-500">
                 <p class="mb-2 text-pink-500 font-bold text-xs tracking-widest uppercase">
                   {t.sections.verify_section.p3_title}
                 </p>
@@ -610,7 +610,7 @@ const r = translations[`roas_${lang}` as "roas_es" | "roas_de"];
                 </p>
               </div>
 
-              <div class="p-6 bg-white/5 rounded-2xl border-l-4 border-orange-500 lg:col-span-3">
+              <div class="p-4 md:p-6 bg-white/5 rounded-2xl border-l-4 border-orange-500 lg:col-span-3">
                 <p class="mb-2 text-orange-500 font-bold text-xs tracking-widest uppercase">
                   {t.sections.verify_section.p4_title}
                 </p>
@@ -670,6 +670,10 @@ const r = translations[`roas_${lang}` as "roas_es" | "roas_de"];
 <style is:global>
   section[id] {
     scroll-margin-top: 100px;
+  }
+  h2 {
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
   @media (min-width: 1024px) {
     section[id] {

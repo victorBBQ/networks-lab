@@ -828,10 +828,10 @@ const t = translations[lang as "es" | "de"];
 
         <section id="verificacion" class="mb-32">
           <div
-            class="p-12 bg-slate-900/20 border-2 border-dashed border-slate-700 rounded-[3.5rem] shadow-2xl"
+            class="p-6 md:p-12 bg-slate-900/20 border-2 border-dashed border-slate-700 rounded-[3.5rem] shadow-2xl"
           >
             <h2
-              class="mb-10 text-4xl font-black text-white text-center tracking-tighter uppercase italic"
+              class="mb-10 text-3xl font-black text-white text-center tracking-tighter uppercase italic"
             >
               {t.sections.verify_section.title}
               <span
@@ -842,7 +842,7 @@ const t = translations[lang as "es" | "de"];
 
             <div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
               <div
-                class="p-6 bg-white/5 rounded-2xl border-l-4 border-blue-500"
+                class="p-4 md:p-6 bg-white/5 rounded-2xl border-l-4 border-blue-500"
               >
                 <p
                   class="mb-2 text-blue-500 font-bold text-xs tracking-widest uppercase"
@@ -858,7 +858,7 @@ const t = translations[lang as "es" | "de"];
               </div>
 
               <div
-                class="p-6 bg-white/5 rounded-2xl border-l-4 border-emerald-500"
+                class="p-4 md:p-6 bg-white/5 rounded-2xl border-l-4 border-emerald-500"
               >
                 <p
                   class="mb-2 text-emerald-500 font-bold text-xs tracking-widest uppercase"
@@ -874,7 +874,7 @@ const t = translations[lang as "es" | "de"];
               </div>
 
               <div
-                class="p-6 bg-white/5 rounded-2xl border-l-4 border-pink-500"
+                class="p-4 md:p-6 bg-white/5 rounded-2xl border-l-4 border-pink-500"
               >
                 <p
                   class="mb-2 text-pink-500 font-bold text-xs tracking-widest uppercase"
@@ -890,7 +890,7 @@ const t = translations[lang as "es" | "de"];
               </div>
 
               <div
-                class="p-6 bg-white/5 rounded-2xl border-l-4 border-orange-500"
+                class="p-4 md:p-6 bg-white/5 rounded-2xl border-l-4 border-orange-500"
               >
                 <p
                   class="mb-2 text-orange-500 font-bold text-xs tracking-widest uppercase"
@@ -900,14 +900,14 @@ const t = translations[lang as "es" | "de"];
                 <p class="text-sm leading-relaxed text-slate-400 italic">
                   {t.sections.verify_section.p4_text1}
                   <span
-                    class="text-white font-bold italic underline decoration-orange-500/50"
+                    class="text-white font-bold italic  decoration-orange-500/50"
                     >{t.sections.verify_section.p4_text2}</span
                   >
                 </p>
               </div>
 
               <div
-                class="p-6 bg-white/5 rounded-2xl border-l-4 border-purple-500 lg:col-span-2"
+                class="p-4 md:p-6 bg-white/5 rounded-2xl border-l-4 border-purple-500 lg:col-span-2"
               >
                 <p
                   class="mb-2 text-purple-500 font-bold text-xs tracking-widest tracking-tighter uppercase italic"
@@ -917,7 +917,7 @@ const t = translations[lang as "es" | "de"];
                 <p class="text-sm leading-relaxed text-slate-400 italic">
                   {t.sections.verify_section.p5_text1}
                   <span
-                    class="text-white font-bold italic underline decoration-purple-500/50"
+                    class="text-white font-bold italic decoration-purple-500/50"
                     >{t.sections.verify_section.p5_text2}</span
                   >
                 </p>
@@ -1000,6 +1000,10 @@ const t = translations[lang as "es" | "de"];
 <style is:global>
   section[id] {
     scroll-margin-top: 100px;
+  }
+  h2 {
+    hyphens: auto;
+    overflow-wrap: break-word;
   }
 
   /* En pantallas grandes (PC) puedes ajustarlo si quieres más aire */

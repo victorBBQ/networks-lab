@@ -93,7 +93,9 @@
       "s05": {
         "title": "05. Enrutamiento Dinámico (RIP v2)",
         "subtitle": "Configuración para GV-L, GV-R y Routers:",
-        "rip_note": "(Aplicar solo en Routers)"
+        "rip_note": "(Aplicar solo en Routers)",
+        "prod_note": "Nota de Producción:",
+        "prod_text": "RIPv2 es ideal para laboratorios y redes pequeñas por su simplicidad. Sin embargo, en redes empresariales reales se recomienda usar OSPF o EIGRP, ya que ofrecen convergencia más rápida, mejor escalabilidad y menor consumo de ancho de banda. RIP tiene un límite de 15 saltos y envía tablas de enrutamiento completas cada 30 segundos, lo que lo hace ineficiente en redes grandes."
       },
       "s06": {
         "title": "06. Enrutamiento Estático (Plan de Red)",
@@ -492,7 +494,9 @@
       "s05": {
         "title": "05. Dynamisches Routing (RIP v2)",
         "subtitle": "Konfiguration für GV-L, GV-R und Router:",
-        "rip_note": "(Nur auf Routern anwenden)"
+        "rip_note": "(Nur auf Routern anwenden)",
+        "prod_note": "Produktionshinweis:",
+        "prod_text": "RIPv2 ist ideal für Labore und kleine Netzwerke aufgrund seiner Einfachheit. In realen Unternehmensnetzwerken wird jedoch OSPF oder EIGRP empfohlen, da sie schnellere Konvergenz, bessere Skalierbarkeit und geringeren Bandbreitenverbrauch bieten. RIP hat ein Limit von 15 Hops und sendet alle 30 Sekunden vollständige Routing-Tabellen, was es in großen Netzwerken ineffizient macht."
       },
       "s06": {
         "title": "06. Statisches Routing (Netzwerkplan)",

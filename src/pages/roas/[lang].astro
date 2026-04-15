@@ -18,7 +18,7 @@ const t = translations[lang as "es" | "de"];
 const r = translations[`roas_${lang}` as "roas_es" | "roas_de"];
 ---
 
-<html lang={lang} class="scroll-smooth">
+<html lang={lang} class="scroll-smooth overflow-x-hidden">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
@@ -29,7 +29,7 @@ const r = translations[`roas_${lang}` as "roas_es" | "roas_de"];
     />
   </head>
 
-  <body class="text-slate-300 font-sans bg-[#020617] selection:bg-blue-500/30">
+  <body class="text-slate-300 font-sans bg-[#020617] selection:bg-blue-500/30 overflow-x-hidden">
 
     <div class="lg:hidden fixed top-0 left-0 right-0 z-[100] bg-[#020617] border-b border-white/10 p-4 flex justify-between items-center">
       <div class="text-blue-500 font-black text-xl italic uppercase">
